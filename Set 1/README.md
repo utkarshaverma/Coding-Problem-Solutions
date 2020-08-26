@@ -1,4 +1,4 @@
-Profit Target
+Profit Target: 
 Given an array of n elements wgere each element gives the yearly profit of a corresponding stock, 
 find the max number of distinct pairs (pairs differing in atleast one element) from the array that add up to the given profit target.
 
