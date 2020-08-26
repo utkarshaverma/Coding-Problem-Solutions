@@ -1,0 +1,33 @@
+public static int maxDifference(List<Integer> px) {
+
+        int maxDiff = Integer.MIN_VALUE;
+        int count =0;
+        for(int i=1;i<px.size();i++)
+        {
+            if(px.get(i) > px.get(i-1))
+            {
+                for(int j = i-1;j>=0 && px.get(i) > px.get(j);j--)
+                {
+                    int diff = px.get(i) - px.get(j);
+                    maxDiff = Math.max(maxDiff , diff);
+                }
+            }
+            else if( px.get(i) <= px.get(i-1))
+            {
+                count++;
+            }
+            
+        }
+        if(count == px.size() -1)
+            return -1;
+        return maxDiff;
+    // Write your code here
+
+    }
+
+public static void main(String[] args)
+{
+	// initialize main function to read data.
+	// call maxDifference() and pass array as List<Integer>
+	// return type is int.
+}
