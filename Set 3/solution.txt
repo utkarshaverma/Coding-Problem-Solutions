@@ -1,0 +1,92 @@
+import java.util.*;
+import java.io.*;
+
+public class MyClass
+{
+    static ArrayList<String> dict = new ArrayList<>();
+    static Map<Character, Map<Integer,Integer>> map = new HashMap<>();
+    
+    static void addDict()
+    {
+        dict.add("cat");
+        dict.add("map");
+        dict.add("pan");
+        dict.add("can");
+        dict.add("mat");
+        dict.add("tap");
+        dict.add("bat");
+        
+        System.out.println(dict.toString());
+    }
+    static void setFreq()
+    {
+        for(String word:dict)
+        {
+            
+            for(int i =0;i<word.length();i++)
+            {
+                Map<Integer,Integer> mp = new HashMap<>();
+                char c = word.charAt(i);
+                //System.out.println(c);
+                //System.out.println("1 "+map.toString());
+                if(!map.keySet().contains(c)) map.put(c,mp);
+                //System.out.println("2 "+map.toString());
+                //System.out.println("3 "+map.keySet().toString());
+                if(!map.get(c).keySet().contains(i)) 
+                    {
+                       map.get(c).put(i,1);
+                  //     System.out.println("4 "+map.toString());
+                    }
+                else{
+                        map.get(c).put(i,map.get(c).get(i)+1);
+                    //    System.out.println("5 "+map.toString());
+                    }
+                //System.out.println("6 "+map.toString());
+            }
+        }
+        System.out.println("7 "+map.toString());
+    }
+    
+    static int getCount(String query)
+    {
+        int flag=0;
+        int count=Integer.MAX_VALUE;
+        for(int i=0;i<query.length();i++)
+        {
+            char c = query.charAt(i);
+            //System.out.println(c);
+            if(Character.isLetter(c))
+            {
+                //System.out.println(map.keySet().toString());
+                if(map.keySet().contains(c))
+                {
+                    //System.out.println(map.get(c).toString());
+                    if(map.get(c).keySet().contains(i)) 
+                    {
+                        count = Math.min(count,map.get(c).get(i));
+                        //System.out.println(String.valueOf(count));
+                    }
+                }
+            }
+        }
+        if(count == Integer.MAX_VALUE) return 0;
+        else return count;
+    }
+    
+    public static void main(String[] args)
+    {
+        addDict();
+        setFreq();
+        
+        ArrayList<String> set = new ArrayList<>();
+        set.add("?a?");
+        set.add("??t");
+        set.add("c??");
+        
+        for(String word:set)
+        {
+            int ans = getCount(word);
+            System.out.println(word+" : "+String.valueOf(ans));
+        }
+    }
+}
